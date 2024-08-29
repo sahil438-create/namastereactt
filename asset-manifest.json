@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/namastereactt/static/css/main.8c36ae18.css",
+    "main.js": "/namastereactt/static/js/main.6e9b4f9f.js",
+    "static/js/70.0c7e8100.chunk.js": "/namastereactt/static/js/70.0c7e8100.chunk.js",
+    "index.html": "/namastereactt/index.html",
+    "main.8c36ae18.css.map": "/namastereactt/static/css/main.8c36ae18.css.map",
+    "main.6e9b4f9f.js.map": "/namastereactt/static/js/main.6e9b4f9f.js.map",
+    "70.0c7e8100.chunk.js.map": "/namastereactt/static/js/70.0c7e8100.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c36ae18.css",
+    "static/js/main.6e9b4f9f.js"
+  ]
+}
