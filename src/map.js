@@ -8,8 +8,6 @@ import Contact from './Contact';
 import Resinfo from './Resinfo';
 import Restmenu from './Restmenu';
 import './App.css';
-import { ClerkProvider } from '@clerk/clerk-react';
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -20,7 +18,6 @@ import Header from './components/header';
 import { CartContext, CartProvider } from './components/CartContext';
 
 const Grocery = lazy(() => import('./components/Grocery'));
-// const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const Applayout = () => {
   const [mode, setMode] = useState('DARKMODE');
@@ -71,13 +68,8 @@ const Cart = () => {
   const [totalValue, setTotalValue] = useState(0); // Total value calculation
 
   const [showMap, setShowMap] = useState(false); // To control visibility of map and input
+  console.log(showMap, 'showmap');
   const [address, setAddress] = useState(''); // To store the address
-  const [center, setCenter] = useState({
-    lat: -3.745,
-    lng: -38.523,
-  }); // Map center
-  const [markerPosition, setMarkerPosition] = useState(center);
-
   const handleAddAddressClick = () => {
     setShowMap(true);
   };
@@ -85,6 +77,18 @@ const Cart = () => {
   const handleMapSelect = (selectedAddress) => {
     setAddress(selectedAddress); // Set the address from the map
   };
+
+  const containerStyle = {
+    width: '400px',
+    height: '400px',
+  };
+
+  const center = {
+    lat: -3.745,
+    lng: -38.523,
+  };
+
+  const [markerPosition, setMarkerPosition] = useState(center);
 
   const handleMapClick = (e) => {
     const lat = e.latLng.lat();
@@ -107,26 +111,6 @@ const Cart = () => {
         console.error('Geocoder failed due to: ' + status);
       }
     });
-  };
-
-  // Fetch current location using browser's Geolocation API
-  const handleUseCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          setMarkerPosition({ lat, lng }); // Update marker to current location
-          setCenter({ lat, lng }); // Center the map on current location
-          getGeocodeAddress(lat, lng); // Reverse geocode to get address
-        },
-        (error) => {
-          console.error('Error getting location: ', error);
-        }
-      );
-    } else {
-      alert('Geolocation is not supported by this browser.');
-    }
   };
 
   // Calculate total value whenever the cart changes
@@ -178,11 +162,10 @@ const Cart = () => {
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
-
   const Showaddress = () => {
     setshowadd(address);
   };
-
+  console.log(showadd, 'showadd');
   return (
     <div>
       {cart.map((elem, index) => (
@@ -222,16 +205,10 @@ const Cart = () => {
             className='mt-4 p-2 border rounded'
             placeholder='Enter your address'
           />
-          <button
-            onClick={handleUseCurrentLocation}
-            className='bg-green-500 text-white py-2 px-4 rounded mt-4'
-          >
-            Use Current Location
-          </button>
           <GoogleMapComponent
             onSelectLocation={handleMapSelect}
             markerPosition={markerPosition}
-            containerStyle={{ width: '400px', height: '400px' }}
+            containerStyle={containerStyle}
             center={center}
             handleMapClick={handleMapClick}
           />
@@ -247,7 +224,7 @@ const Cart = () => {
   );
 };
 
-// Separate Map Component
+//Separate Map Component
 const GoogleMapComponent = ({
   onSelectLocation,
   markerPosition,
@@ -287,18 +264,12 @@ const approuter = createBrowserRouter([
       { path: 'home', element: <Body /> },
       { path: ':ResName/:resid', element: <Restmenu /> },
     ],
-    errorElement: <Error />,
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ClerkProvider
-    publishableKey='pk_test_cG93ZXJmdWwtc3RhcmZpc2gtNzYuY2xlcmsuYWNjb3VudHMuZGV2JA'
-    afterSignOutUrl='/'
-  >
-    <CartProvider>
-      <RouterProvider router={approuter} />
-    </CartProvider>
-  </ClerkProvider>
+  <CartProvider>
+    <RouterProvider router={approuter} />
+  </CartProvider>
 );

@@ -16,7 +16,6 @@ const Restaurantcard = (props) => {
           src={url + cloudinaryImageId}
           width='250px'
         />
-
         <h3 className='font-bold py-4 text-lg'>{name}</h3>
         <h4>{costForTwo}</h4>
         <h5>{avgRating}</h5>
@@ -26,7 +25,7 @@ const Restaurantcard = (props) => {
     </div>
   );
 };
-//input -Restaurant Card=> RestaurantcardPromoted(i.e  Restaurant card having aggregatedDiscountInfoV2 on it 	)
+
 export const C = (Restaurantcard) => {
   return () => {
     return (

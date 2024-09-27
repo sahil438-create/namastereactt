@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import { CartContext } from './components/CartContext'; // Import CartContext
 import useRestmenu from './components/utils/usehooks';
 
 const Restmenu = () => {
   const { resid } = useParams();
-  console.log(resid, 'resid');
   const resinfo1 = useRestmenu(resid);
+  const { addToCart } = useContext(CartContext);
+
+  const handleAddToCart = (item) => {
+    addToCart(item);
+  };
+
   return resinfo1 === null ? (
     <div>Loading.....</div>
   ) : (
@@ -16,6 +22,14 @@ const Restmenu = () => {
           <li key={index}>
             {inf.card.info.name}:
             {inf.card.info.price / 100 || inf.card.info.defaultPrice / 100}
+            <span>
+              <button
+                onClick={() => handleAddToCart(inf)}
+                className='bg-green-50'
+              >
+                ADD
+              </button>
+            </span>
           </li>
         ))}
       </ol>

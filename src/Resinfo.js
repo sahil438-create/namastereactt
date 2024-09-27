@@ -28,7 +28,7 @@ const Resinfo = () => {
     resinfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
       ?.title;
 
-  console.log(resinfo);
+  console.log(resinfo, 'resinfo');
 
   return (
     <div>

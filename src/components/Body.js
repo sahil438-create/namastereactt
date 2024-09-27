@@ -64,8 +64,9 @@ const Body = () => {
           <button
             className='px-2 bg-green-100  m-6 rounded-lg'
             onClick={() => {
-              (resList1 = resList.filter((abc) => abc.info.avgRating > 4)),
-                setfilteredrestaurant(resList1);
+              setfilteredrestaurant(
+                resList.filter((abc) => abc.info.avgRating == 4.4)
+              );
             }}
           >
             Top Rated Restaurant

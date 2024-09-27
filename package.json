@@ -29,9 +29,11 @@
     "tailwindcss": "^3.4.1"
   },
   "dependencies": {
+    "@clerk/clerk-react": "^5.9.3",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.10",
+    "@react-google-maps/api": "^2.19.3",
     "@reduxjs/toolkit": "^2.2.7",
     "@vercel/speed-insights": "^1.0.10",
     "node-html-parser": "^6.1.11",
@@ -44,7 +46,7 @@
   "bugs": {
     "url": "https://github.com/sahil438-create/namaste-reactt/issues"
   },
-  "homepage": "https://sahil438-create.github.io/namastereactt/",
+  "homepage": "https://sahil438-create.github.io/",
   "browserslist": {
     "production": [
       ">0.2%",
