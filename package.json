@@ -2,6 +2,7 @@
   "name": "namaste-reactt",
   "version": "1.0.0",
   "description": "this is react",
+  "proxy": "https://www.swiggy.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
