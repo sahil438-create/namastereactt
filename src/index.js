@@ -23,32 +23,34 @@ const Grocery = lazy(() => import('./components/Grocery'));
 // const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const Applayout = () => {
-  const [mode, setMode] = useState('DARKMODE');
-  const [Dark, setDark] = useState(
-    'bg-green dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
+  const [themeText, setThemeText] = useState('DARKMODE');
+  const [theme, setTheme] = useState(
+    'bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
   );
 
   const toggleDarkMode = () => {
-    if (mode === 'DARKMODE') {
-      setDark(
+    if (themeText === 'DARKMODE') {
+      console.log("33")
+      setTheme(
         'bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono text-amber-600'
       );
-      setMode('LIGHTMODE');
+      setThemeText('LIGHTMODE');
     } else {
-      setDark(
-        'bg-green dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
+      console.log("39")
+      setTheme(
+        'bg-white rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
       );
-      setMode('DARKMODE');
+      setThemeText('DARKMODE');
     }
   };
 
   return (
-    <div className={Dark}>
+    <div className={theme}>
       <button
         className='px-4 bg-green-100 m-4 rounded-lg'
         onClick={toggleDarkMode}
       >
-        {mode}
+        {themeText}
       </button>
       <Header />
       <Outlet />
