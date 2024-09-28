@@ -38,7 +38,6 @@
     "@vercel/speed-insights": "^1.0.10",
     "fix-cors-errors": "^1.0.0",
     "node-html-parser": "^6.1.11",
-    "proxy": "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.1.2",
