@@ -14,9 +14,10 @@ const Body = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
   const fetchData = async () => {
-    const data = await fetch('/api/fetchData');
+    const data = await fetch(
+      'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+    );
 
     const json = await data.json();
     console.log(json, 'json');
@@ -63,9 +64,9 @@ const Body = () => {
           <button
             className='px-2 bg-green-100  m-6 rounded-lg'
             onClick={() => {
-              setfilteredrestaurant(
-                resList.filter((abc) => abc.info.avgRating == 4.4)
-              );
+              let resList1;
+              (resList1 = resList.filter((abc) => abc.info.avgRating > 4.5)),
+                setfilteredrestaurant(resList1);
             }}
           >
             Top Rated Restaurant
