@@ -66,6 +66,7 @@ const About = () => {
 
 const Cart = () => {
   const { cart } = useContext(CartContext);
+
   const [showadd, setshowadd] = useState('');
 
   const [totalValue, setTotalValue] = useState(0); // Total value calculation
@@ -184,62 +185,99 @@ const Cart = () => {
   };
 
   return (
-    <div>
-      {cart.map((elem, index) => (
-        <div key={index}>
-          <p>{elem.card.info.name}</p>
-          <p>
-            {(
-              elem.card.info.price / 100 || elem.card.info.defaultPrice / 100
-            ).toFixed(2)}
-          </p>
-        </div>
-      ))}
-      <h1 className='flex justify-between mb-4'>
-        To Pay: {totalValue.toFixed(2)}
-      </h1>
-      <h1>Choose a delivery address</h1>
-      <button
-        onClick={handleAddAddressClick}
-        className='bg-blue-500 text-white py-2 px-4 rounded'
-      >
-        Add new Address
-      </button>
-      <button
-        onClick={() => Showaddress()}
-        className='bg-blue-500 text-white py-2 px-4 rounded'
-      >
-        Save and Proceed
-      </button>
-      <h1>{showadd}</h1>
+    <div className='min-h-screen p-8 bg-gray-50 flex flex-col items-center'>
+      {/* Cart Items */}
+      <div className='bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 mb-8'>
+        <h1 className='text-2xl font-bold text-gray-800 mb-6 border-b pb-4'>
+          Your Cart
+        </h1>
+        {cart.map((elem, index) => (
+          <div
+            key={index}
+            className='flex justify-between items-center border-b pb-4 mb-4 last:border-none last:pb-0 last:mb-0'
+          >
+            <div className='text-lg font-medium text-gray-700'>
+              {elem.card.info.name}
+            </div>
+            <div className='text-gray-500'>
+              ₹
+              {(
+                elem.card.info.price / 100 || elem.card.info.defaultPrice / 100
+              ).toFixed(2)}
+            </div>
 
+            <img
+              src={`https://media-assets.swiggy.com/swiggy/image/upload/${elem.card.info.imageId}`}
+              alt={elem.card.info.name}
+              className='w-24 h-24 rounded-md object-cover shadow-md mb-2'
+            />
+          </div>
+        ))}
+        <div className='flex justify-between items-center text-xl font-bold mt-6 border-t pt-4'>
+          <h2>Total:</h2>
+          <span>₹{totalValue.toFixed(2)}</span>
+        </div>
+      </div>
+      {/* <img
+        src={`https://media-assets.swiggy.com/swiggy/image/upload/elem.card.info.imageId`}
+        alt=''
+      /> */}
+
+      {/* Delivery Address Section */}
+      <div className='bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 mb-8'>
+        <h1 className='text-xl font-bold mb-4 text-gray-800'>
+          Choose a delivery address
+        </h1>
+        <div className='flex space-x-4'>
+          <button
+            onClick={handleAddAddressClick}
+            className='flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'
+          >
+            Add new Address
+          </button>
+          <button
+            onClick={() => Showaddress()}
+            className='flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300'
+          >
+            Save and Proceed
+          </button>
+        </div>
+
+        {showadd && <h1 className='text-gray-700 mt-4'>{showadd}</h1>}
+      </div>
+
+      {/* Map and Input for Address */}
       {showMap && (
-        <>
+        <div className='bg-white w-full max-w-3xl rounded-lg shadow-lg p-6 mb-8'>
           <input
             type='text'
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className='mt-4 p-2 border rounded'
+            className='w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring focus:ring-blue-200'
             placeholder='Enter your address'
           />
+
           <button
             onClick={handleUseCurrentLocation}
-            className='bg-green-500 text-white py-2 px-4 rounded mt-4'
+            className='w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg shadow-md transition duration-300 mb-4'
           >
             Use Current Location
           </button>
+
           <GoogleMapComponent
             onSelectLocation={handleMapSelect}
             markerPosition={markerPosition}
-            containerStyle={{ width: '400px', height: '400px' }}
+            containerStyle={{ width: '100%', height: '400px' }}
             center={center}
             handleMapClick={handleMapClick}
           />
-        </>
+        </div>
       )}
+
+      {/* Pay Now Button */}
       <button
         onClick={loadRazorpay}
-        className='bg-green-500 text-white py-2 px-4 rounded'
+        className='w-full max-w-3xl bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-lg shadow-lg transition duration-300 text-xl font-semibold'
       >
         Pay Now
       </button>
@@ -285,7 +323,7 @@ const approuter = createBrowserRouter([
       },
       { path: '/', element: <Body /> },
       { path: 'home', element: <Body /> },
-      { path: ':ResName/:resid', element: <Restmenu /> },
+      { path: ':ResName/:resid/:name', element: <Restmenu /> },
     ],
     errorElement: <Error />,
   },

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-// import CDN_url, { Localurl } from '/src/components/utils/url';
 
 const Restaurantcard = (props) => {
   const url =
@@ -10,7 +9,7 @@ const Restaurantcard = (props) => {
 
   return (
     <div className=' rounded-lg m-4 p-4   w-[250px] bg-gray md:hover:scale-110 darkFrontPageCoreOffering'>
-      <Link to={'/ResName/' + id}>
+      <Link to={'/ResName/' + id + '/' + name}>
         <img
           className='flex w-[250px] h-[200px] rounded-lg'
           src={url + cloudinaryImageId}
