@@ -94,7 +94,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch('http://localhost:3000');
+    const data = await fetch('https://namastereactt.onrender.com/');
     const json = await data.json();
     console.log(json);
     const restaurants =
