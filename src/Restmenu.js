@@ -11,12 +11,12 @@ const Restmenu = () => {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
+  console.log(resinfo1, 'jssjjhhj');
 
   return resinfo1 === null ? (
     <div>Loading.....</div>
   ) : (
     <div className='bg-gray-100 min-h-screen flex items-center justify-center p-8'>
-      hello
       <div className='bg-white shadow-lg rounded-lg p-6 w-full max-w-4xl'>
         <h1 className='text-3xl font-bold text-gray-800 mb-6 text-center'>
           {name}

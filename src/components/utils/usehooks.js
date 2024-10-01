@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 const useRestmenu = (resid12) => {
   const [resinfo, setresinfo] = useState(null);
 
@@ -7,13 +6,10 @@ const useRestmenu = (resid12) => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const response = await fetch(
-      '/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=' +
-        resid12 +
-        '&catalog_qa=undefined&submitAction=ENTER'
-    );
+    const response = await fetch(`http://localhost:5000/ResName/${resid12}`);
 
     const json = await response.json();
+
     if (
       json?.data?.cards[4].groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
         ?.card?.itemCards

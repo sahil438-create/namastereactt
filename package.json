@@ -2,7 +2,6 @@
   "name": "namaste-reactt",
   "version": "1.0.0",
   "description": "this is react",
-  "proxy": "https://www.swiggy.com",
   "scripts": {
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server.js",

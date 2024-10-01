@@ -25,13 +25,4 @@ const Restaurantcard = (props) => {
   );
 };
 
-export const C = (Restaurantcard) => {
-  return () => {
-    return (
-      <div>
-        <Restaurantcard />
-      </div>
-    );
-  };
-};
 export default Restaurantcard;
