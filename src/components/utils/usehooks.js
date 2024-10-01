@@ -6,7 +6,9 @@ const useRestmenu = (resid12) => {
     fetchData();
   }, []);
   const fetchData = async () => {
-    const response = await fetch(`http://localhost:5000/ResName/${resid12}`);
+    const response = await fetch(
+      `https://namastereactt.onrender.com/ResName/${resid12}`
+    );
 
     const json = await response.json();
 
