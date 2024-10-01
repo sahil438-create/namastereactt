@@ -8,19 +8,27 @@ const Restaurantcard = (props) => {
     restData?.info;
 
   return (
-    <div className=' rounded-lg m-4 p-4   w-[250px] bg-gray md:hover:scale-110 darkFrontPageCoreOffering'>
-      <Link to={'/ResName/' + id + '/' + name}>
-        <img
-          className='flex w-[250px] h-[200px] rounded-lg'
-          src={url + cloudinaryImageId}
-          width='250px'
-        />
-        <h3 className='font-bold py-4 text-lg'>{name}</h3>
-        <h4>{costForTwo}</h4>
-        <h5>{avgRating}</h5>
-        <h5>{sla.slaString}</h5>
-        <h5>{cuisines.join('     ,    ')}</h5>
-      </Link>
+    <div className='w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-4'>
+      <div className='bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition-transform duration-300'>
+        <Link to={'/ResName/' + id + '/' + name}>
+          <img
+            className='w-full h-48 object-cover rounded-t-lg'
+            src={url + cloudinaryImageId}
+            alt={name}
+          />
+          <div className='p-4'>
+            <h3 className='font-bold text-lg truncate'>{name}</h3>
+            <p className='text-gray-500 text-sm'>{costForTwo}</p>
+            <div className='flex items-center mt-1'>
+              <span className='text-yellow-500 text-sm'>{avgRating} ⭐</span>
+            </div>
+            <p className='text-gray-400 text-sm'>{sla?.slaString}</p>
+            <p className='text-gray-500 text-sm whitespace-normal break-words'>
+              {cuisines.join(', ')}
+            </p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };
