@@ -7,7 +7,7 @@ const useRestmenu = (resid12) => {
   }, []);
   const fetchData = async () => {
     const response = await fetch(
-      `https://namastereactt.vercel.app/ResName/${resid12}`
+      `https://namastereactt.vercel.app/api/ResName/${resid12}`
     );
 
     const json = await response.json();
