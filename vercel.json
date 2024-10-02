@@ -8,12 +8,16 @@
   ],
   "routes": [
     {
-      "src": "/api/restaurants",
+      "src": "/api/(.*)",
       "dest": "/api/index.js"
     },
     {
-      "src": "/api/menu",
-      "dest": "/api/index.js"
+      "src": "/",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
