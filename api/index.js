@@ -32,7 +32,7 @@ const fetchWithRetry = async (url, retries = 3) => {
 };
 
 // Route 1: Fetch Swiggy restaurant list
-app.get('/api/restaurants2', async (req, res) => {
+app.get('/api/restaurants', async (req, res) => {
   const url =
     'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
 
@@ -47,9 +47,9 @@ app.get('/api/restaurants2', async (req, res) => {
 });
 
 // Route 2: Fetch Swiggy restaurant list (different route)
-app.get('/api/restaurants', async (req, res) => {
-  const url =
-    'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
+app.get('/api/ResName/:id', async (req, res) => {
+  const resid12 = req.params.id;
+  const url = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resid12}&catalog_qa=undefined&submitAction=ENTER`;
 
   try {
     const data = await fetchWithRetry(url);
