@@ -15,6 +15,8 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch('https://namastereactt.onrender.com');
+    // const data = await fetch('http://localhost:5000');
+
     const json = await data.json();
     console.log(json);
     const restaurants =

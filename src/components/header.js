@@ -12,7 +12,8 @@ import {
 
 const Header = () => {
   const { cartTotal } = useContext(CartContext); // Get cartTotal from context
-  const { signOut } = useClerk(); // Clerk's signOut method
+  const { signOut, signIn } = useClerk(); // Clerk's signOut method
+  // const { sign } = useClerk(); // Clerk's signOut method
   const [menuOpen, setMenuOpen] = useState(false); // State to handle mobile menu toggle
 
   const toggleMenu = () => {
@@ -89,15 +90,21 @@ const Header = () => {
                 <UserButton />
               </SignedIn>
             </li>
+            <li>
+              <SignedOut>
+                <button
+                  className='hover:text-pink-700'
+                  onClick={() => signIn()}
+                >
+                  Signin
+                </button>
+              </SignedOut>
+            </li>
           </ul>
         </div>
 
         {/* Authentication and User Options */}
-        <div className='absolute top-0 right-0 flex items-center space-x-4 mt-4 mr-4'>
-          <SignedOut>
-            <SignInButton mode='modal' />
-          </SignedOut>
-        </div>
+        <div className='absolute top-0 right-0 flex items-center space-x-4 mt-4 mr-4'></div>
       </div>
 
       {/* Mobile Navigation */}
