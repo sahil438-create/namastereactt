@@ -35,7 +35,7 @@ const fetchWithRetry = async (url, retries = 3) => {
 };
 
 // Fetch Swiggy restaurant list
-app.get('/api/restaurants', async (req, res) => {
+app.get('/', async (req, res) => {
   const url =
     'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
 
@@ -56,7 +56,7 @@ app.get('/api/restaurants', async (req, res) => {
 });
 
 // Fetch Swiggy menu by restaurant ID
-app.get('/api/ResName/:id', async (req, res) => {
+app.get('/ResName/:id', async (req, res) => {
   const resid12 = req.params.id;
   const url = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resid12}&catalog_qa=undefined&submitAction=ENTER`;
 
