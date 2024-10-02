@@ -14,7 +14,9 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch('https://namastereactt.vercel.app');
+    const data = await fetch(
+      'https://namastereactt.vercel.app/api/restaurants'
+    );
     // const data = await fetch('http://localhost:5000');
 
     const json = await data.json();

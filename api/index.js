@@ -35,7 +35,7 @@ const fetchWithRetry = async (url, retries = 3) => {
 };
 
 // Fetch Swiggy restaurant list
-app.get('/', async (req, res) => {
+app.get('/api/restaurants', async (req, res) => {
   const url =
     'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
 
