@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "this is react",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "react-scripts start",
     "server": "node server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
