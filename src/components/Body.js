@@ -17,7 +17,6 @@ const Body = () => {
     const data = await fetch(
       'https://namastereactt.vercel.app/api/restaurants'
     );
-    // const data = await fetch('http://localhost:5000');
 
     const json = await data.json();
     console.log(json);
