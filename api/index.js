@@ -56,7 +56,7 @@ app.get('/api/restaurants', async (req, res) => {
 });
 
 // Fetch Swiggy menu by restaurant ID
-app.get('/ResName/:id', async (req, res) => {
+app.get('/api/ResName/:id', async (req, res) => {
   const resid12 = req.params.id;
   const url = `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resid12}&catalog_qa=undefined&submitAction=ENTER`;
 
