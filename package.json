@@ -52,7 +52,7 @@
   "bugs": {
     "url": "https://github.com/sahil438-create/namaste-reactt/issues"
   },
-  "homepage": "https://sahil438-create.github.io/",
+  "homepage": "https://namastereactt.vercel.app/",
   "browserslist": {
     "production": [
       ">0.2%",
