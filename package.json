@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "this is react",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "parcel public/index.html",
     "server": "node server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
@@ -52,7 +52,7 @@
   "bugs": {
     "url": "https://github.com/sahil438-create/namaste-reactt/issues"
   },
-  "homepage": "https://namastereactt.vercel.app/",
+  "homepage": "https://namastereactt.vercel.app",
   "browserslist": {
     "production": [
       ">0.2%",
