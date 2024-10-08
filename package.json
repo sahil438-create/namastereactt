@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "this is react",
   "scripts": {
-    "start": "parcel public/index.html",
+    "start": "react-scripts start",
     "server": "node server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
@@ -23,6 +23,7 @@
   "author": "sahil gupta",
   "license": "ISC",
   "devDependencies": {
+    "@parcel/transformer-webmanifest": "^2.12.0",
     "concurrently": "^9.0.1",
     "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.6.0",
@@ -52,7 +53,7 @@
   "bugs": {
     "url": "https://github.com/sahil438-create/namaste-reactt/issues"
   },
-  "homepage": "https://namastereactt.vercel.app",
+  "homepage": "https://sahil438-create.github.io/namastereactt",
   "browserslist": {
     "production": [
       ">0.2%",
