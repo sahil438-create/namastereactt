@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunknamaste_reactt=self.webpackChunknamaste_reactt||[]).push([[70],{70:(e,a,s)=>{s.r(a),s.d(a,{default:()=>c});var t=s(579);const c=()=>(0,t.jsx)("h1",{children:" This Is an Grocery page "})}}]);
-//# sourceMappingURL=70.0c7e8100.chunk.js.map
