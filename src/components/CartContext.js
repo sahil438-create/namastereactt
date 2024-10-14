@@ -12,7 +12,6 @@ export const CartProvider = ({ children }) => {
 
     setCartTotal((prevTotal) => prevTotal + 1);
   };
-  console.log(cart, 'cart');
 
   return (
     <CartContext.Provider value={{ cart, cartTotal, addToCart }}>

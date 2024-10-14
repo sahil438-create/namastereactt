@@ -8,21 +8,33 @@ import Contact from './Contact';
 import Resinfo from './Resinfo';
 import Restmenu from './Restmenu';
 import './App.css';
-import { ClerkProvider } from '@clerk/clerk-react';
 
 import {
-  createBrowserRouter,
+  ClerkProvider,
+  useAuth,
+  SignedOut,
+  SignIn,
+  SignInButton,
+} from '@clerk/clerk-react';
+
+import {
   RouterProvider,
+  Routes,
   Outlet,
-  Link,
+  HashRouter,
+  useNavigate,
+  Route,
+  createHashRouter,
+  createBrowserRouter,
 } from 'react-router-dom';
 import Header from './components/header';
 import { CartContext, CartProvider } from './components/CartContext';
+import SignInPage from './components/SignInPage';
+import Grocery from './components/Grocery';
 
-const Grocery = lazy(() => import('./components/Grocery'));
-// const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+// const Grocery = lazy(() => import('./components/Grocery'));
 
-const Applayout = () => {
+const RootLayout = () => {
   const [mode, setMode] = useState('DARKMODE');
   const [Dark, setDark] = useState(
     'bg-green dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
@@ -54,6 +66,23 @@ const Applayout = () => {
       <Outlet />
     </div>
   );
+};
+
+const DashboardLayout = () => {
+  const { userId, isLoaded } = useAuth();
+  const navigate = useNavigate();
+
+  console.log('test', userId);
+
+  React.useEffect(() => {
+    if (isLoaded && !userId) {
+      navigate('/sign-in');
+    }
+  }, [isLoaded]);
+
+  if (!isLoaded) return 'Loading...';
+
+  return <Outlet />;
 };
 
 const About = () => {
@@ -305,38 +334,37 @@ const GoogleMapComponent = ({
   </LoadScript>
 );
 
-const approuter = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: '/',
-    element: <Applayout />,
+    element: <RootLayout />,
     children: [
-      { path: 'about', element: <About /> },
-      { path: 'cart', element: <Cart /> },
-      { path: 'contact', element: <Contact /> },
-      {
-        path: 'grocery',
-        element: (
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <Grocery />
-          </Suspense>
-        ),
-      },
       { path: '/', element: <Body /> },
-      { path: 'home', element: <Body /> },
-      { path: ':ResName/:resid/:name', element: <Restmenu /> },
+      { path: '/Contact', element: <Contact /> },
+      { path: '/Grocery', element: <Grocery /> },
+      { path: '/sign-in/*', element: <SignInPage /> },
+      { path: '/home', element: <Body /> },
+
+      { path: '/about', element: <About /> },
+
+      {
+        element: <DashboardLayout />,
+        path: '',
+        children: [
+          { path: '/cart', element: <Cart /> },
+          { path: ':ResName/:resid/:name', element: <Restmenu /> },
+        ],
+      },
     ],
-    errorElement: <Error />,
   },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ClerkProvider
     publishableKey='pk_test_cG93ZXJmdWwtc3RhcmZpc2gtNzYuY2xlcmsuYWNjb3VudHMuZGV2JA'
     afterSignOutUrl='/'
   >
     <CartProvider>
-      <RouterProvider router={approuter} />
+      <RouterProvider router={router} />
     </CartProvider>
   </ClerkProvider>
 );

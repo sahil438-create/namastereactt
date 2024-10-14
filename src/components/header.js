@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { Link, HashRouter } from 'react-router-dom';
+import { useState } from 'react';
 import { CartContext } from './CartContext'; // Import CartContext
 import { Logo_url } from './utils/url';
 import {
@@ -9,12 +9,12 @@ import {
   UserButton,
   useClerk,
 } from '@clerk/clerk-react';
+import { useContext } from 'react';
 
 const Header = () => {
-  const { cartTotal } = useContext(CartContext); // Get cartTotal from context
-  const { signOut, signIn } = useClerk(); // Clerk's signOut method
-  // const { sign } = useClerk(); // Clerk's signOut method
-  const [menuOpen, setMenuOpen] = useState(false); // State to handle mobile menu toggle
+  const { cartTotal } = useContext(CartContext);
+  const { signOut, signIn } = useClerk();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -78,27 +78,15 @@ const Header = () => {
                 Cart ({cartTotal})
               </Link>
             </li>
-
-            <li>
-              <SignedIn>
-                <button
-                  className='hover:text-pink-700'
-                  onClick={() => signOut()}
-                >
-                  Signout
-                </button>
-                <UserButton />
-              </SignedIn>
-            </li>
             <li>
               <SignedOut>
-                <button
-                  className='hover:text-pink-700'
-                  onClick={() => signIn()}
-                >
-                  Signin
-                </button>
+                <Link to='/sign-in'>Sign In</Link>
               </SignedOut>
+            </li>
+            <li>
+              <SignedIn>
+                <UserButton />
+              </SignedIn>
             </li>
           </ul>
         </div>
@@ -108,6 +96,7 @@ const Header = () => {
       </div>
 
       {/* Mobile Navigation */}
+
       <div
         className={`${
           menuOpen ? 'block' : 'hidden'
@@ -158,6 +147,16 @@ const Header = () => {
             >
               Cart ({cartTotal})
             </Link>
+          </li>
+          <li>
+            <SignedOut>
+              <Link to='/sign-in'>Sign In</Link>
+            </SignedOut>
+          </li>
+          <li>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </li>
         </ul>
       </div>

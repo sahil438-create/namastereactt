@@ -19,14 +19,12 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+
     const restaurants =
       json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
     setnewList(restaurants);
     setfilteredrestaurant(restaurants);
   };
-
-  console.log(resList, 'resilist');
 
   return resList.length === 0 ? (
     <Shimmer />
