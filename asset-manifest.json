@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/namastereactt/static/css/main.ccaf0411.css",
-    "main.js": "/namastereactt/static/js/main.a7857255.js",
+    "main.js": "/namastereactt/static/js/main.e86a152c.js",
     "index.html": "/namastereactt/index.html",
     "main.ccaf0411.css.map": "/namastereactt/static/css/main.ccaf0411.css.map",
-    "main.a7857255.js.map": "/namastereactt/static/js/main.a7857255.js.map"
+    "main.e86a152c.js.map": "/namastereactt/static/js/main.e86a152c.js.map"
   },
   "entrypoints": [
     "static/css/main.ccaf0411.css",
-    "static/js/main.a7857255.js"
+    "static/js/main.e86a152c.js"
   ]
 }
