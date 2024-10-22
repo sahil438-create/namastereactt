@@ -11,7 +11,6 @@ const Restmenu = () => {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
-  console.log(resinfo1, 'jssjjhhj');
 
   return resinfo1 === null ? (
     <div>Loading.....</div>

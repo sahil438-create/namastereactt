@@ -1,36 +1,39 @@
-import { Link, HashRouter } from 'react-router-dom';
-import { useState } from 'react';
-import { CartContext } from './CartContext'; // Import CartContext
+import { Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { CartContext } from './CartContext';
 import { Logo_url } from './utils/url';
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-  useClerk,
-} from '@clerk/clerk-react';
-import { useContext } from 'react';
+import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
   const { cartTotal } = useContext(CartContext);
-  const { signOut, signIn } = useClerk();
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
+
   return (
     <header className='bg-pink-50 shadow-lg mb-2 mt-2 px-4'>
+      <style>{`
+        body.disable-scroll {
+          overflow: hidden;
+        }
+      `}</style>
+
       <div className='flex justify-between items-center relative'>
-        {/* Logo Section */}
         <div className='flex'>
           <Link to='/home'>
             <img className='w-40 h-32' src={Logo_url} alt='Logo' />
           </Link>
         </div>
 
-        {/* Hamburger Icon for Mobile */}
         <div className='md:hidden flex items-center'>
           <button onClick={toggleMenu}>
             <svg
@@ -50,7 +53,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Desktop Navigation Links */}
         <div className='hidden md:flex items-center'>
           <ul className='flex items-center space-x-4'>
             <li>
@@ -79,23 +81,18 @@ const Header = () => {
               </Link>
             </li>
             <li>
-              <SignedOut>
-                <Link to='/sign-in'>Sign In</Link>
-              </SignedOut>
-            </li>
-            <li>
               <SignedIn>
                 <UserButton />
               </SignedIn>
+              <SignedOut>
+                <Link className='hover:text-pink-700' to='/sign-in'>
+                  login
+                </Link>
+              </SignedOut>
             </li>
           </ul>
         </div>
-
-        {/* Authentication and User Options */}
-        <div className='absolute top-0 right-0 flex items-center space-x-4 mt-4 mr-4'></div>
       </div>
-
-      {/* Mobile Navigation */}
 
       <div
         className={`${
@@ -148,16 +145,14 @@ const Header = () => {
               Cart ({cartTotal})
             </Link>
           </li>
-          <li>
-            <SignedOut>
-              <Link to='/sign-in'>Sign In</Link>
-            </SignedOut>
-          </li>
-          <li>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </li>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
+          <SignedOut>
+            <Link className='hover:text-pink-700' to='/sign-in'>
+              login
+            </Link>
+          </SignedOut>
         </ul>
       </div>
     </header>

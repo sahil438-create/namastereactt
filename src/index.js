@@ -15,26 +15,34 @@ import {
   SignedOut,
   SignIn,
   SignInButton,
+  useClerk,
+  SignedIn,
+  UserButton,
 } from '@clerk/clerk-react';
 
 import {
   RouterProvider,
   Routes,
   Outlet,
+  useLocation,
   HashRouter,
   useNavigate,
   Route,
   createHashRouter,
   createBrowserRouter,
+  Link,
 } from 'react-router-dom';
 import Header from './components/header';
 import { CartContext, CartProvider } from './components/CartContext';
-import SignInPage from './components/SignInPage';
+import SignInPage from './components/sign-in';
 import Grocery from './components/Grocery';
+import SignUpPage from './components/sign-up';
 
 // const Grocery = lazy(() => import('./components/Grocery'));
 
 const RootLayout = () => {
+  const navigate = useNavigate();
+
   const [mode, setMode] = useState('DARKMODE');
   const [Dark, setDark] = useState(
     'bg-green dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl font-mono'
@@ -55,24 +63,28 @@ const RootLayout = () => {
   };
 
   return (
-    <div className={Dark}>
-      <button
-        className='px-4 bg-green-100 m-4 rounded-lg'
-        onClick={toggleDarkMode}
-      >
-        {mode}
-      </button>
-      <Header />
-      <Outlet />
-    </div>
+    <ClerkProvider
+      routerPush={(to) => navigate(to)}
+      routerReplace={(to) => navigate(to, { replace: true })}
+      publishableKey='pk_test_cG93ZXJmdWwtc3RhcmZpc2gtNzYuY2xlcmsuYWNjb3VudHMuZGV2JA'
+    >
+      <div className={Dark}>
+        <button
+          className='px-4 bg-green-100 m-4 rounded-lg'
+          onClick={toggleDarkMode}
+        >
+          {mode}
+        </button>
+        <Header />
+        <Outlet />
+      </div>
+    </ClerkProvider>
   );
 };
 
 const DashboardLayout = () => {
   const { userId, isLoaded } = useAuth();
   const navigate = useNavigate();
-
-  console.log('test', userId);
 
   React.useEffect(() => {
     if (isLoaded && !userId) {
@@ -334,37 +346,30 @@ const GoogleMapComponent = ({
   </LoadScript>
 );
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       { path: '/', element: <Body /> },
       { path: '/Contact', element: <Contact /> },
       { path: '/Grocery', element: <Grocery /> },
-      { path: '/sign-in/*', element: <SignInPage /> },
       { path: '/home', element: <Body /> },
-
       { path: '/about', element: <About /> },
+      { path: '/sign-in/*', element: <SignInPage /> },
 
       {
         element: <DashboardLayout />,
         path: '',
         children: [
           { path: '/cart', element: <Cart /> },
-          { path: ':ResName/:resid/:name', element: <Restmenu /> },
+          { path: '/:ResName/:resid/:name', element: <Restmenu /> },
         ],
       },
     ],
   },
 ]);
-
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ClerkProvider
-    publishableKey='pk_test_cG93ZXJmdWwtc3RhcmZpc2gtNzYuY2xlcmsuYWNjb3VudHMuZGV2JA'
-    afterSignOutUrl='/'
-  >
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
-  </ClerkProvider>
+  <CartProvider>
+    <RouterProvider router={router} />
+  </CartProvider>
 );
