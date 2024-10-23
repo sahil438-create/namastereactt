@@ -1,18 +1,41 @@
 const express = require('express');
 const axios = require('axios');
-const cors = require('cors');
 
 const app = express();
 
-// Enable CORS with explicit origin settings
-app.use(
-  cors({
-    origin: 'https://sahil438-create.github.io', // Allow your GitHub Pages domain
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-);
+// Manually add CORS headers middleware
+app.use((req, res, next) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://sahil438-create.github.io'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,HEAD,PUT,PATCH,POST,DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
+// Handle OPTIONS preflight requests
+app.options('/api/*', (req, res) => {
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://sahil438-create.github.io'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET,HEAD,PUT,PATCH,POST,DELETE'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.sendStatus(204); // No Content
+});
 
 // Function to make requests with retries
 const fetchWithRetry = async (url, retries = 3) => {
@@ -45,10 +68,6 @@ app.get('/api/restaurants', async (req, res) => {
 
   try {
     const data = await fetchWithRetry(url);
-    res.setHeader(
-      'Access-Control-Allow-Origin',
-      'https://sahil438-create.github.io'
-    ); // Allow your frontend
     res.json(data);
   } catch (error) {
     console.error('Error fetching data from Swiggy:', error.message);
@@ -63,10 +82,6 @@ app.get('/api/ResName/:id', async (req, res) => {
 
   try {
     const data = await fetchWithRetry(url);
-    res.setHeader(
-      'Access-Control-Allow-Origin',
-      'https://sahil438-create.github.io'
-    ); // Allow your frontend
     res.json(data);
   } catch (error) {
     console.error('Error fetching menu details:', error.message);
