@@ -3,12 +3,9 @@ const axios = require('axios');
 
 const app = express();
 
-// Manually add CORS headers middleware
+// Add CORS headers for all routes and methods
 app.use((req, res, next) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://sahil438-create.github.io'
-  );
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins for testing
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET,HEAD,PUT,PATCH,POST,DELETE'
@@ -17,15 +14,13 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
+  res.setHeader('Access-Control-Allow-Credentials', 'true'); // Add this if cookies are being used
   next();
 });
 
-// Handle OPTIONS preflight requests
-app.options('/api/*', (req, res) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://sahil438-create.github.io'
-  );
+// Handle OPTIONS preflight requests globally
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins for testing
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET,HEAD,PUT,PATCH,POST,DELETE'
@@ -88,6 +83,14 @@ app.get('/api/ResName/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch menu details' });
   }
 });
+
+// Start the server (for local testing, not needed for Vercel deployment)
+const PORT = process.env.PORT || 5000;
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
 
 // Export the Express app as a Vercel serverless function
 module.exports = app;

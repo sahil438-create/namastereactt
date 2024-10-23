@@ -4,7 +4,7 @@
   "description": "this is react",
   "scripts": {
     "start": "react-scripts start",
-    "server": "node index.js",
+    "server": "node api/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
