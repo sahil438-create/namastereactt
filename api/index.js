@@ -4,10 +4,10 @@ const cors = require('cors');
 
 const app = express();
 
-// Enable CORS with specific options
+// Enable CORS with explicit origin settings
 app.use(
   cors({
-    origin: '*', // Allows all origins, adjust as necessary
+    origin: 'https://sahil438-create.github.io', // Allow your GitHub Pages domain
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     preflightContinue: false,
     optionsSuccessStatus: 204,
@@ -45,7 +45,10 @@ app.get('/api/restaurants', async (req, res) => {
 
   try {
     const data = await fetchWithRetry(url);
-    res.setHeader('Access-Control-Allow-Origin', '*'); // Set CORS headers
+    res.setHeader(
+      'Access-Control-Allow-Origin',
+      'https://sahil438-create.github.io'
+    ); // Allow your frontend
     res.json(data);
   } catch (error) {
     console.error('Error fetching data from Swiggy:', error.message);
@@ -60,7 +63,10 @@ app.get('/api/ResName/:id', async (req, res) => {
 
   try {
     const data = await fetchWithRetry(url);
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+      'Access-Control-Allow-Origin',
+      'https://sahil438-create.github.io'
+    ); // Allow your frontend
     res.json(data);
   } catch (error) {
     console.error('Error fetching menu details:', error.message);
