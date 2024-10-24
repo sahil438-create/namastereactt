@@ -346,7 +346,7 @@ const GoogleMapComponent = ({
   </LoadScript>
 );
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
