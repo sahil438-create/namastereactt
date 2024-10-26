@@ -3,27 +3,21 @@ export default async function handler(req, res) {
     'https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING';
 
   try {
-    // Attempt to fetch data from Swiggy
-    const response = await fetch(swiggyURL);
+    const response = await fetch(swiggyURL, {
+      headers: { 'User-Agent': 'Mozilla/5.0' }, // Optional: Some servers use User-Agent checks
+    });
 
-    // Log status and headers for debugging purposes
-    console.log('Status:', response.status);
-    console.log('Headers:', response.headers);
+    const contentType = response.headers.get('content-type');
 
-    // Check for a successful JSON response
-    if (
-      response.ok &&
-      response.headers.get('content-type')?.includes('application/json')
-    ) {
+    // Check if the response is JSON, otherwise handle as error
+    if (contentType && contentType.includes('application/json')) {
       const data = await response.json();
       res.status(200).json(data);
     } else {
-      // If response is not JSON, return an error message
-      const errorText = await response.text();
-      console.error('Non-JSON response:', errorText);
       res.status(500).json({
         error: 'Swiggy API did not return JSON data',
-        details: errorText,
+        details:
+          'Received HTML instead of JSON; likely due to CORS or bot-blocking.',
       });
     }
   } catch (error) {
