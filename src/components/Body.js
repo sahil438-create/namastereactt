@@ -13,16 +13,31 @@ const Body = () => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      '/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
-    );
-    const json = await data.json();
+  // const fetchData = async () => {
+  //   const data = await fetch(
+  //     '/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+  //   );
 
-    const restaurants =
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
-    setnewList(restaurants);
-    setfilteredrestaurant(restaurants);
+  const fetchData = async () => {
+    const baseURL =
+      process.env.NODE_ENV === 'development'
+        ? '' // Use proxy in development by leaving baseURL empty
+        : 'https://www.swiggy.com'; // Use Swiggy API directly in production
+
+    try {
+      const response = await fetch(
+        `${baseURL}/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+      );
+      const json = await response.json();
+      const restaurants =
+        json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants;
+      setnewList(restaurants);
+      setfilteredrestaurant(restaurants);
+      // Handle your data here
+      console.log(data, 'dddddddddddddddddddddddddddddddd');
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return resList.length === 0 ? (
