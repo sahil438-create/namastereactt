@@ -7,7 +7,7 @@ const useRestmenu = (resid12) => {
   }, []);
   const fetchData = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/ResName/${resid12}`
+      `/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=${resid12}&catalog_qa=undefined&submitAction=ENTER`
     );
 
     const json = await response.json();

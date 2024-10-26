@@ -14,8 +14,9 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch('http://localhost:5000/api/restaurants');
-
+    const data = await fetch(
+      '/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+    );
     const json = await data.json();
 
     const restaurants =

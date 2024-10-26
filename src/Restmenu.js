@@ -7,6 +7,7 @@ const Restmenu = () => {
   const { resid, name } = useParams();
   const resinfo1 = useRestmenu(resid);
   const { addToCart } = useContext(CartContext);
+  console.log(resinfo1, 'hb');
 
   const handleAddToCart = (item) => {
     addToCart(item);
