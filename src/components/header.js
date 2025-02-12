@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react';
 import { CartContext } from './CartContext';
-import { Logo_url } from './utils/url';
+import downloadImage from '../download.jpg';
+
 import { SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
@@ -30,7 +31,7 @@ const Header = () => {
       <div className='flex justify-between items-center relative'>
         <div className='flex'>
           <Link to='/home'>
-            <img className='w-40 h-32' src={Logo_url} alt='Logo' />
+            <img className='w-40 h-32' src={downloadImage} alt='Logo' />
           </Link>
         </div>
 
