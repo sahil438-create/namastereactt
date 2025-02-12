@@ -17,7 +17,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        '/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+        '/api/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
       );
 
       const json = await response.json();

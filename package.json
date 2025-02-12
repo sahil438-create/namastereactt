@@ -11,7 +11,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "proxy": "https://www.swiggy.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sahil438-create/namastereactt.git"
