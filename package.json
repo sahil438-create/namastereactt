@@ -19,6 +19,7 @@
     "react",
     "namaste"
   ],
+  "proxy": "https://www.swiggy.com",
   "author": "sahil gupta",
   "license": "ISC",
   "devDependencies": {

@@ -4,7 +4,7 @@ import useOnlineStatus from './utils/useonlineStatus';
 import Restaurantcard from '../Restaurantcard';
 
 const Body = () => {
-  console.log('12 feb 2025');
+  console.log('14 feb 2025');
   const [resList, setnewList] = useState([]);
   const [filteredrestaurant, setfilteredrestaurant] = useState([]);
   const [searchtext, setsearchtext] = useState('');
@@ -17,7 +17,7 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        '/api/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+        'https://thingproxy.freeboard.io/fetch/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
       );
 
       const json = await response.json();
